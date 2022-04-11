@@ -5,18 +5,18 @@
         <div class="container-fluid px-4">
             <div class="card mb-4">
                 <div class="card-header text-capitalize">
-                    Add a new Company
+                    Edit Company {{$company->company_name}}
                     <a href="{{route('company.index')}}" class="btn btn-primary btn-sm" style="float: right;"><i class="far fa-arrow-alt-left me-2"></i>Go Back</a>
                 </div>
                 <div class="card-body">
-                    <form class="align-items-center" action="{{route('company.store')}}" method="POST" enctype="multipart/form-data">
+                    <form class="align-items-center" action="{{route('company.update',$company->id)}}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         <div class="row my-3">
                             <div class="col-lg-12 col-12">
                                 <div class="input-group">
                                   <div class="input-group-text">Name <span class="text text-danger">*</span></div>
-                                  <input type="text" name="company_name" class="form-control" placeholder="Company Name">
-                                  @error('company_name') <span class="text text-danger">{{$message}}*</span>@enderror
+                                  <input type="text" name="company_name" class="form-control" placeholder="Company Name" value="{{$company->company_name}}">
                                 </div>
                             </div>                            
                         </div> 
@@ -24,7 +24,7 @@
                             <div class="col-lg-12 col-12">
                                 <div class="input-group">
                                   <div class="input-group-text">Address</div>
-                                  <input type="text" name="company_address" class="form-control" placeholder="Company Address">
+                                  <input type="text" name="company_address" class="form-control" placeholder="Company Address" value="{{$company->company_address}}">
                                 </div>
                             </div>                            
                         </div>
@@ -32,7 +32,7 @@
                             <div class="col-lg-12 col-12">
                                 <div class="input-group">
                                   <div class="input-group-text">Website</div>
-                                  <input type="text" name="company_website" class="form-control" placeholder="Company Website">
+                                  <input type="text" name="company_website" class="form-control" placeholder="Company Website" value="{{$company->company_website}}">
                                 </div>
                             </div>                            
                         </div>  
@@ -40,7 +40,7 @@
                             <div class="col-lg-12 col-12">
                                 <div class="input-group">
                                   <div class="input-group-text">Contact</div>
-                                  <input type="tel" name="company_contact_no" class="form-control" placeholder="Contact Number">
+                                  <input type="tel" name="company_contact_no" class="form-control" placeholder="Contact Number" value="{{$company->company_contact_no}}">
                                 </div>
                             </div>                            
                         </div>
@@ -52,7 +52,11 @@
                                 </div>
                             </div>
                             <div class="col-lg-5 col-12">
+                                @if($company->company_logo)
+                                    <img src="{{asset('uploads/company')}}/{{$company->company_logo}}" id="output-image" alt="{{$company->company_name}}" width="100%">
+                                @else
                                 <img id="output-image" width="100%">
+                                @endif
                             </div>                           
                         </div>
                         <div class="row my-3">

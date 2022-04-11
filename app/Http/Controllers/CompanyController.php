@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CompanyRequest;
 use App\Models\Company;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\File; 
 
 
 class CompanyController extends Controller
@@ -79,7 +80,8 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
-        //
+        $company = Company::find($id);
+        return view('company.edit',compact('company'));
     }
 
     /**
@@ -90,8 +92,27 @@ class CompanyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {   
+        $company = Company::find($id);
+        if($image = $request->file('company_logo'))
+        {
+            $file_path = public_path('uploads/company/').$company->company_logo;
+            if(File::exists($file_path)){
+                unlink($file_path);
+            }
+            $destinationPath = public_path('uploads/company/');
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $company_logo = $profileImage;
+        }
+
+        $company->company_name = $request->company_name;
+        $company->company_address = $request->company_address;
+        $company->company_website = $request->company_website;
+        $company->company_contact_no = $request->company_contact_no;
+        $company->company_logo = $company_logo;
+        $company->save();
+        return redirect()->route('company.index')->withSuccess('Company details has been updated Successfully!');
     }
 
     /**
@@ -102,6 +123,13 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $company = Company::find($id);
+        $file_path = public_path('uploads/company/').$company->company_logo;
+        if(File::exists($file_path)){
+            unlink($file_path);
+        }
+        $company->delete();
+        return redirect()->route('company.index')->withSuccess('Company details has been deleted Successfully!');
+
     }
 }

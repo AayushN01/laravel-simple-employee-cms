@@ -36,8 +36,8 @@
                                         <td>{{$company->company_address}}</td>
                                         <td><a href="{{url($company->company_website)}}" target="__blank">{{$company->company_website}}</a></td>
                                         <td>
-                                            <a href="#" class="btn btn-warning btn-sm">Edit</a>
-                                            <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                                            <a href="{{route('company.edit',$company->id)}}" class="btn btn-warning btn-sm">Edit</a>
+                                            <a href="{{route('company.delete',$company->id)}}" class="btn btn-danger btn-sm">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach
