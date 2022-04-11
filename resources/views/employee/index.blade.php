@@ -27,17 +27,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th>1</th>
-                                    <td>Aayush Niraula</td>
-                                    <td>Company of Nepal</td>
-                                    <td>aayushniraula1@gmail.com</td>
-                                    <td>
-                                        <a href="" class="btn btn-primary btn-sm">Show</a>
-                                        <a href="" class="btn btn-warning btn-sm">Edit</a>
-                                        <a href="" class="btn btn-danger btn-sm">Delete</a>
-                                    </td>
-                                </tr>
+                                @foreach ($employees as $key => $employee )
+                                    <tr>
+                                        <th>{{++$key}}</th>
+                                        <td>{{$employee->first_name}}&nbsp;{{$employee->last_name}}</td>
+                                        <td>{{$employee->company->company_name}}</td>
+                                        <td>{{$employee->email}}</td>
+                                        <td>
+                                            <a href="#" class="btn btn-primary btn-sm">Show</a>
+                                            <a href="#" class="btn btn-warning btn-sm">Edit</a>
+                                            <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                         

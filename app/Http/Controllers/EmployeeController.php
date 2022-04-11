@@ -15,8 +15,9 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('employee.index');
+    {   
+        $employees = Employee::with('company')->orderBy('created_at','DESC')->get();
+        return view('employee.index',compact('employees'));
     }
 
     /**
