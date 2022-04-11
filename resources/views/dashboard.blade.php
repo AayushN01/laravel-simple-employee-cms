@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div id="layoutSidenav">
-    @include('layouts.sidenav')
+    
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
@@ -571,5 +570,5 @@
             </div>
         </footer>
     </div>
-</div>
+
 @endsection

@@ -55,7 +55,6 @@
         </header>
         <section>
         <div id="layoutSidenav">
-            @include('layouts.sidenav')
             @yield('content')
         </div>
         </section>

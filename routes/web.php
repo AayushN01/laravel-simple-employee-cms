@@ -25,3 +25,11 @@ Route::post('logout',[App\Http\Controllers\Auth\LoginController::class,'logout']
 // Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+
+Route::group(['prefix'=>'admin', 'middleware' => 'auth'], function(){
+    Route::group(['as'=>'company.', 'prefix'=>'company'], function(){
+        Route::get('/', [App\Http\Controllers\CompanyController::class,'index'])->name('index');
+        Route::get('/create', [App\Http\Controllers\CompanyController::class,'create'])->name('create');
+        Route::post('', [App\Http\Controllers\CompanyController::class,'store'])->name('store');
+    });
+});
