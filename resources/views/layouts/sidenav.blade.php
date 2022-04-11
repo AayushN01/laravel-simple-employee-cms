@@ -11,7 +11,7 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                     User Management
                 </a>
-                <a href="#" class="nav-link">
+                <a href="{{route('employee.index')}}" class="nav-link">
                     <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                     Employee Mgmt.
                 </a>

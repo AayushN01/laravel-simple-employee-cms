@@ -35,4 +35,10 @@ Route::group(['prefix'=>'admin', 'middleware' => 'auth'], function(){
         Route::put('/{id}', [App\Http\Controllers\CompanyController::class,'update'])->name('update');
         Route::get('/{id}', [App\Http\Controllers\CompanyController::class,'destroy'])->name('delete');
     });
+
+    Route::group(['as'=>'employee.', 'prefix'=>'employee'], function(){
+        Route::get('/', [App\Http\Controllers\EmployeeController::class,'index'])->name('index');
+        Route::get('/create', [App\Http\Controllers\EmployeeController::class,'create'])->name('create');
+        Route::post('/', [App\Http\Controllers\EmployeeController::class,'store'])->name('store');
+    }); 
 });

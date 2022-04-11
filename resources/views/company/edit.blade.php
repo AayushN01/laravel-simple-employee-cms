@@ -15,7 +15,7 @@
                         <div class="row my-3">
                             <div class="col-lg-12 col-12">
                                 <div class="input-group">
-                                  <div class="input-group-text">Name <span class="text text-danger">*</span></div>
+                                  <div class="input-group-text">Name</div>
                                   <input type="text" name="company_name" class="form-control" placeholder="Company Name" value="{{$company->company_name}}">
                                 </div>
                             </div>                            
