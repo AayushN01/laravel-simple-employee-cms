@@ -17,6 +17,9 @@
                 <!-- Navbar Brand-->
                 <a class="navbar-brand ps-3" href="#">Employee CMS</a>
                 <!-- Sidebar Toggle-->
+                @if(Auth::user())
+                <button class="btn btn-link btn-sm" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+                @endif
                 <!-- Navbar-->
                 <ul class="navbar-nav ms-auto">
                     @guest
@@ -27,22 +30,24 @@
                     @endif
                     
                     @else
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown me-3">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }}
+                            <i class="fas fa-user fa-fw"></i> {{ Auth::user()->name }}
                         </a>
-                    
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-                    
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </div>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#!">Settings</a></li>
+                            <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li>
+                            <a class="dropdown-item" href="{{ route('logout') }}"onclick="event.preventDefault();
+                                              document.getElementById('logout-form').submit();">
+                                 {{ __('Logout') }}
+                             </a>
+                     
+                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                 @csrf
+                             </form></li>
+                        </ul>
                     </li>
                     @endguest
                 </ul>
