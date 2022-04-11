@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Company;
 use App\Models\User;
+use App\Models\Employee;
 
 class HomeController extends Controller
 {
@@ -27,6 +28,7 @@ class HomeController extends Controller
     {   
         $company = Company::count();
         $user = User::count();
-        return view('dashboard',compact('company','user'));
+        $employee = Employee::count();
+        return view('dashboard',compact('company','user','employee'));
     }
 }

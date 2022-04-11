@@ -22,7 +22,7 @@
                     </div>
                     <div class="col-xl-4 col-md-6">
                         <div class="card bg-danger text-white mb-4">
-                            <div class="card-body"><h5 class="text-center">Total Registered Employees</h5><h1 class="text-center" style="font-size: 4rem;">123</h1></div>
+                            <div class="card-body"><h5 class="text-center">Total Registered Employees</h5><h1 class="text-center" style="font-size: 4rem;">{{$employee}}</h1></div>
                         </div>
                     </div>
                 </div>
