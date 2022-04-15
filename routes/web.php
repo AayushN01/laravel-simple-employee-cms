@@ -54,4 +54,10 @@ Route::group(['prefix'=>'admin', 'middleware' => 'auth'], function(){
         Route::put('/{id}',[App\Http\Controllers\CategoryController::class,'update'])->name('update');
         Route::get('/{id}',[App\Http\Controllers\CategoryController::class,'destroy'])->name('delete');
     });
+
+    Route::group(['as'=>'product.','prefix'=>'product'],function(){
+        Route::get('/',[App\Http\Controllers\ProductController::class,'index'])->name('index');
+        Route::get('/create',[App\Http\Controllers\ProductController::class,'create'])->name('create');
+        Route::post('/',[App\Http\Controllers\ProductController::class,'store'])->name('store');
+    });
 });
