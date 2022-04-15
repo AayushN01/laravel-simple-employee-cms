@@ -45,4 +45,13 @@ Route::group(['prefix'=>'admin', 'middleware' => 'auth'], function(){
         Route::put('{id}/', [App\Http\Controllers\EmployeeController::class,'update'])->name('update');
         Route::get('{id}/', [App\Http\Controllers\EmployeeController::class,'destroy'])->name('delete');
     }); 
+
+    Route::group(['as'=>'category.','prefix'=>'category'],function(){
+        Route::get('/',[App\Http\Controllers\CategoryController::class,'index'])->name('index');
+        Route::get('/create',[App\Http\Controllers\CategoryController::class,'create'])->name('create');
+        Route::post('/create',[App\Http\Controllers\CategoryController::class,'store'])->name('store');
+        Route::get('/edit/{id}',[App\Http\Controllers\CategoryController::class,'edit'])->name('edit');
+        Route::put('/{id}',[App\Http\Controllers\CategoryController::class,'update'])->name('update');
+        Route::get('/{id}',[App\Http\Controllers\CategoryController::class,'destroy'])->name('delete');
+    });
 });
