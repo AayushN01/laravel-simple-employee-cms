@@ -41,5 +41,8 @@ Route::group(['prefix'=>'admin', 'middleware' => 'auth'], function(){
         Route::get('/create', [App\Http\Controllers\EmployeeController::class,'create'])->name('create');
         Route::post('/', [App\Http\Controllers\EmployeeController::class,'store'])->name('store');
         Route::get('show/{id}/', [App\Http\Controllers\EmployeeController::class,'show'])->name('show');
+        Route::get('edit/{id}/', [App\Http\Controllers\EmployeeController::class,'edit'])->name('edit');
+        Route::put('{id}/', [App\Http\Controllers\EmployeeController::class,'update'])->name('update');
+        Route::get('{id}/', [App\Http\Controllers\EmployeeController::class,'destroy'])->name('delete');
     }); 
 });

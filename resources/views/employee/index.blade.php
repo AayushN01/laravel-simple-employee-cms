@@ -20,6 +20,7 @@
                             <thead>
                                 <tr>
                                     <th>SNo.</th>
+                                    <th>Photo</th>
                                     <th>Full Name</th>
                                     <th>Name of the Company</th>
                                     <th>Email</th>
@@ -30,13 +31,14 @@
                                 @foreach ($employees as $key => $employee )
                                     <tr>
                                         <th>{{++$key}}</th>
+                                        <td><img src="{{asset('uploads/employee')}}/{{$employee->photo}}" alt="" class="rounded-circle" height="50" width="50"></td>
                                         <td>{{$employee->first_name}}&nbsp;{{$employee->last_name}}</td>
                                         <td>{{$employee->company->company_name}}</td>
                                         <td>{{$employee->email}}</td>
                                         <td>
                                             <a href="{{route('employee.show',$employee->id)}}" class="btn btn-primary btn-sm">Show</a>
-                                            <a href="#" class="btn btn-warning btn-sm">Edit</a>
-                                            <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                                            <a href="{{route('employee.edit',$employee->id)}}" class="btn btn-warning btn-sm">Edit</a>
+                                            <a href="{{route('employee.delete',$employee->id)}}" class="btn btn-danger btn-sm">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach

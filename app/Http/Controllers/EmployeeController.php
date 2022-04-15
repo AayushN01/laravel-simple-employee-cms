@@ -6,6 +6,8 @@ use App\Models\Company;
 use App\Models\Employee;
 use App\Http\Requests\EmployeeRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\File; 
 
 class EmployeeController extends Controller
 {
@@ -85,7 +87,9 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $employee = Employee::find($id);
+        $companies = Company::get();
+        return view('employee.edit',compact('employee','companies'));
     }
 
     /**
@@ -97,7 +101,34 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $employee = Employee::find($id);
+        if($image = $request->file('photo')){
+            $file_path = public_path('uploads/employee/').$employee->photo;
+            if(File::exists($file_path))
+            {
+                unlink($file_path);
+            }
+            $destinationPath = public_path('uploads/employee/');
+            $profileImage = date('YmdHis').".".$image->getClientOriginalExtension();
+            $image->move($destinationPath,$profileImage);
+            $employee_photo = $profileImage;
+        } else {
+            $employee_photo = $employee->photo;
+        }
+        
+        $employee->first_name = $request->first_name;
+        $employee->last_name = $request->last_name;
+        $employee->company_id = $request->company_id;
+        $employee->email = $request->email;
+        $employee->contact_no = $request->contact_no;
+        $employee->address = $request->address;
+        $employee->gender = $request->gender;
+        $employee->dob = $request->dob;
+        $employee->designation = $request->designation;
+        $employee->photo = $employee_photo;
+        $employee->save();
+
+        return redirect()->route('employee.index')->withSuccess('Employee data has been updated Successfully!');
     }
 
     /**
@@ -108,6 +139,13 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $employee = Employee::find($id);
+        $file_path = public_path('uploads/employee/').$employee->photo;
+        if(File::exists($file_path))
+        {
+            unlink($file_path);
+        }
+        $employee->delete();
+        return redirect()->back()->withSuccess('Employee data has been deleted Successfully!');
     }
 }
