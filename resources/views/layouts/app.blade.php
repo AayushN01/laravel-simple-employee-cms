@@ -4,6 +4,8 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        {{-- CSRF --}}
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Laravel CMS</title>
@@ -67,5 +69,8 @@
         <script src="{{asset('assets/demo/chart-bar-demo.js')}}"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="{{asset('js/datatables-simple-demo.js')}}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        @yield('scripts')
+        
     </body>
 </html>

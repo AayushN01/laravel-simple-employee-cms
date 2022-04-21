@@ -60,4 +60,9 @@ Route::group(['prefix'=>'admin', 'middleware' => 'auth'], function(){
         Route::get('/create',[App\Http\Controllers\ProductController::class,'create'])->name('create');
         Route::post('/',[App\Http\Controllers\ProductController::class,'store'])->name('store');
     });
+
+    Route::group(['as'=>'student.','prefix'=>'student'],function(){
+        Route::get('/',[App\Http\Controllers\StudentController::class,'index'])->name('index');
+        Route::post('/students',[App\Http\Controllers\StudentController::class,'store'])->name('store');
+    });
 });
