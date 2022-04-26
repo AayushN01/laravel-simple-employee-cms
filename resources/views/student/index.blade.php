@@ -54,6 +54,47 @@
                         </div>
                     </div>
                     {{-- END OF MODAL --}}
+                    {{-- Edit student modal --}}
+                    <div class="modal fade" id="editStudentModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Edit % Update Student</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <form action="">
+                                <div class="modal-body">
+                                    <input type="hidden" id="edit_student_id">
+                                    <div class="form-group mb-3">
+                                        <label for="name" class="form-label">Name</label>
+                                        <input type="text" class="name form-control" name="name" id="edit_name">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="name" class="form-label">EMail</label>
+                                        <input type="email" class="email form-control" name="email" id="edit_email">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="name" class="form-label">Phone</label>
+                                        <input type="tel" class="phone form-control" name="phone" id="edit_phone">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="name" class="form-label">Course</label>
+                                        <input type="text" class="course form-control" name="course" id="edit_course">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary" id="update_student">Update</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                    {{-- END MODAL --}}
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover">
@@ -105,6 +146,64 @@
                     }
                 });
             }
+
+            $(document).on('click', '.edit_student', function(e){
+                e.preventDefault();
+                var stud_id = $(this).val();
+                // console.log(stud_id);
+                $('#editStudentModal').modal('show');
+                $.ajax({
+                    type: "GET",
+                    url: "student-edit/"+stud_id,
+                    success: function(response){
+                        // console.log(response.message);
+                        if(response.status == 404)
+                        {
+                            $('#success_message').html("");
+                            $('#success_message').addClass('alert alert-danger');
+                            $('#success_message').text(response.message);
+                        } else {
+                            $('#edit_name').val(response.message.name);
+                            $('#edit_email').val(response.message.email);
+                            $('#edit_phone').val(response.message.phone);
+                            $('#edit_course').val(response.message.course);
+                            $('#edit_student_id').val(stud_id);
+                        }
+                    }
+                })
+            });
+
+            $('#update_student').click(function(e){
+                var stud_id = $('#edit_student_id').val();
+                var data = {
+                    'name': $('#edit_name').val(),
+                    'email': $('#edit_email').val(),
+                    'phone': $('#edit_phone').val(),
+                    'course': $('#edit_course').val(),
+                }
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type:"PUT",
+                    url:"update-student/"+stud_id,
+                    data:data,
+                    dataType:"json",
+                    success:function(response){
+                        // console.log(response.message);
+                        if(response.status == 400){
+                            alert("Failed");
+                        }else if(response.status == 404){
+                            alert("Student not found");
+                        }else{
+                            $('#editStudentModal').modal('hide');
+                            fetchData();
+                        }
+                    }
+                });
+            });
 
              $('#add_student').click(function(e) {
                 e.preventDefault();
