@@ -18,11 +18,13 @@ class StudentController extends Controller
         return view('student.index');
     }
 
-    public function getData()
+
+    public function fetchStdData()
     {
         $students = Student::all();
-        return response()->json($students);
+        return response()->json(['message'=>$students]);
     }
+
     /**
      * Show the form for creating a new resource.
      *

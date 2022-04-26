@@ -55,28 +55,22 @@
                     </div>
                     {{-- END OF MODAL --}}
                     <div class="card-body">
-                        @if (Illuminate\Support\Facades\Session::has('success'))
-                            <div class="alert alert-success">
-                                {{ Illuminate\Support\Facades\Session::get('success') }}
-                            </div>
-                        @endif
                         <div class="table-responsive">
-                            <table class="table table-bordered table-hover" id="datatablesSimple">
+                            <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>SNo.</th>
+                                        <th>ID</th>
                                         <th>Student Name</th>
                                         <th>Email</th>
                                         <th>Phone</th>
                                         <th>Course</th>
-                                        <th>Actions</th>
+                                        <th colspan="2" class="text-center">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-
+                                    
                                 </tbody>
                             </table>
-
                         </div>
                     </div>
                 </div>
@@ -87,12 +81,32 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
-            $('#datatablesSimple').DataTable();
-        });
-    </script>
-    <script>
-        $(document).ready(function() {
-            $('#add_student').click(function(e) {
+            fetchData();
+            function fetchData()
+            {
+                $.ajax({
+                    type: "GET",
+                    url: "{{route('student.fetchStdData')}}",
+                    dataType: "json",
+                    success: function(response){
+                        // console.log(response.message);
+                        $('tbody').html(''); //First empty table and then loop
+                        $.each(response.message, function(key,value){
+                            $('tbody').append('<tr>\
+                                        <td>'+value.id+'</td>\
+                                        <td>'+value.name+'</td>\
+                                        <td>'+value.email+'</td>\
+                                        <td>'+value.phone+'</td>\
+                                        <td>'+value.course+'</td>\
+                                        <td><button type="button" value="'+value.id+'" class="edit_student btn btn-warning btn-sm">Edit</button></td>\
+                                        <td><button type="button" value="'+value.id+'" class="delete_student btn btn-danger btn-sm">Delete</button></td>\
+                                    </tr>');
+                        });
+                    }
+                });
+            }
+
+             $('#add_student').click(function(e) {
                 e.preventDefault();
                 var data = {
                     'name': $('.name').val(),
@@ -115,6 +129,7 @@
                         // console.log(response.errors.name); //inline error display
                         $('#addStudentModal').modal('hide');
                         $('#addStudentModal').find('input').val("");
+                        fetchData();
                     }
                 })
             });
