@@ -27,7 +27,7 @@
                     <div class="sb-nav-link-icon"><i class="fab fa-product-hunt"></i></div>
                     Product Management
                 </a>
-                <a href="{{route('student.getData')}}" class="nav-link">
+                <a href="{{route('student.index')}}" class="nav-link">
                     <div class="sb-nav-link-icon"><i class="fab fa-users"></i></div>
                     Student Management
                 </a>
