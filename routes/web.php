@@ -63,6 +63,7 @@ Route::group(['prefix'=>'admin', 'middleware' => 'auth'], function(){
 
     Route::group(['as'=>'student.','prefix'=>'student'],function(){
         Route::get('/',[App\Http\Controllers\StudentController::class,'index'])->name('index');
+        Route::get('/',[App\Http\Controllers\StudentController::class,'getData'])->name('getData');
         Route::post('/students',[App\Http\Controllers\StudentController::class,'store'])->name('store');
     });
 });

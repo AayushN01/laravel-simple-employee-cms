@@ -14,10 +14,15 @@ class StudentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
         return view('student.index');
     }
 
+    public function getData()
+    {
+        $students = Student::all();
+        return response()->json($students);
+    }
     /**
      * Show the form for creating a new resource.
      *
