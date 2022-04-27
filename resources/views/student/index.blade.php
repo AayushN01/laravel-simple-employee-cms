@@ -146,7 +146,24 @@
                     }
                 });
             }
-
+            $(document).on('click','.delete_student', function(e){
+                e.preventDefault();
+                var student_id = $(this).val();
+                // alert(student_id);
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type: "DELETE",
+                    url:"student/"+student_id,
+                    success: function(response){
+                        // console.log(response);
+                        fetchData();
+                    }
+                });
+            });
             $(document).on('click', '.edit_student', function(e){
                 e.preventDefault();
                 var stud_id = $(this).val();

@@ -69,3 +69,4 @@ Route::group(['prefix'=>'admin', 'middleware' => 'auth'], function(){
     Route::post('/students',[App\Http\Controllers\StudentController::class,'store'])->name('student.store');
     Route::get('student-edit/{id}',[App\Http\Controllers\StudentController::class,'edit'])->name('edit');
     Route::put('update-student/{id}',[App\Http\Controllers\StudentController::class,'update'])->name('update');
+    Route::delete('student/{id}',[App\Http\Controllers\StudentController::class,'destroy'])->name('destroy');
