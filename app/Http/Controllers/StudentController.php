@@ -81,7 +81,12 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $student = Student::find($id);
+        if($student){
+            return response()->json(['status'=>200,'message'=>$student]);
+        } else {
+            return response()->json(['status'=>200,'message'=>'Student not found']);
+        }
     }
 
     /**
@@ -93,7 +98,18 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $student = Student::find($id);
+        if($student){
+            $student->name = $request->input('name');
+            $student->email = $request->input('email');
+            $student->phone = $request->input('phone');
+            $student->course = $request->input('course');
+            $student->save();
+            return response()->json(['status'=>200,'message'=>'Student Updated Successfully!']);
+        } else {
+            return response()->json(['status'=>200,'message'=>'Student not found']);
+        }
+ 
     }
 
     /**
