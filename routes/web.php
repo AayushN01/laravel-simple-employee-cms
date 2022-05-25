@@ -61,7 +61,14 @@ Route::group(['prefix'=>'admin', 'middleware' => 'auth'], function(){
         Route::post('/',[App\Http\Controllers\ProductController::class,'store'])->name('store');
     });
 
-
+    Route::group(['as'=>'faculty.','prefix'=>'faculty'], function(){
+        Route::get('',[App\Http\Controllers\FacultyController::class,'index'])->name('index');
+        Route::get('create',[App\Http\Controllers\FacultyController::class,'create'])->name('create');
+        Route::post('',[App\Http\Controllers\FacultyController::class,'store'])->name('store');
+        Route::get('{id}/edit',[App\Http\Controllers\FacultyController::class,'edit'])->name('edit');
+        Route::put('{id}',[App\Http\Controllers\FacultyController::class,'update'])->name('update');
+        Route::get('{id}',[App\Http\Controllers\FacultyController::class,'destroy'])->name('delete');
+    });
 });
 
     Route::get('/',[App\Http\Controllers\StudentController::class,'index'])->name('student.index');
