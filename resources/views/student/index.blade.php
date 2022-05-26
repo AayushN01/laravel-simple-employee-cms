@@ -242,10 +242,10 @@
                     dataType: "json",
                     success: function(response) {
                         console.log(response);
-                        // console.log(response.errors.name); //inline error display
+                          // console.log(response.errors.name); //inline error display
                         $('#addStudentModal').modal('hide');
                         $('#addStudentModal').find('input').val("");
-                        fetchData();
+                      fetchData();
                     }
                 })
             });
