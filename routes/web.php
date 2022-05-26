@@ -69,6 +69,15 @@ Route::group(['prefix'=>'admin', 'middleware' => 'auth'], function(){
         Route::put('{id}',[App\Http\Controllers\FacultyController::class,'update'])->name('update');
         Route::get('{id}',[App\Http\Controllers\FacultyController::class,'destroy'])->name('delete');
     });
+
+    Route::group(['as'=>'course.','prefix'=>'course'], function(){
+        Route::get('',[App\Http\Controllers\CourseController::class,'index'])->name('index');
+        Route::get('create',[App\Http\Controllers\CourseController::class,'create'])->name('create');
+        Route::post('',[App\Http\Controllers\CourseController::class,'store'])->name('store');
+        Route::get('{id}/edit',[App\Http\Controllers\CourseController::class,'edit'])->name('edit');
+        Route::put('{id}',[App\Http\Controllers\CourseController::class,'update'])->name('update');
+        Route::get('{id}',[App\Http\Controllers\CourseController::class,'destroy'])->name('delete');
+    });
 });
 
     Route::get('/',[App\Http\Controllers\StudentController::class,'index'])->name('student.index');
