@@ -114,7 +114,26 @@ class TeacherController extends Controller
         $teacher->contact_no = $request->contact_no;
         $teacher->status = $request->status;
         $teacher->save();
-
+        
+        $courses = $request->course_id;
+        if(!empty($courses)){
+            foreach($courses as $key => $course){
+                $course_data = [
+                    'teacher_id' => $teacher->id,
+                    'course_id' => $course,
+                ];
+                if(!empty($courses)){
+                    $existing_course = TeacherCourse::find($courses);
+                    if($existing_course)
+                    {
+                        $existing_course->update($course_data);
+                    } else {
+                        TeacherCourse::create($course_data);
+                    }
+                }
+            }
+            
+        }
         return redirect()->route('teacher.index')->with('success','Teacher has been updated successfully!');
 
     }
