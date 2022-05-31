@@ -35,6 +35,14 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-address-book"></i></div>
                     Faculty Management
                 </a>
+                <a href="{{route('course.index')}}" class="nav-link">
+                    <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
+                    Course Management
+                </a>
+                <a href="{{route('teacher.index')}}" class="nav-link">
+                    <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                    Teacher Management
+                </a>
                 {{-- <div class="sb-sidenav-menu-heading">e-Commerce</div>
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
